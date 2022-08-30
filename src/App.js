@@ -1,32 +1,57 @@
 // import { Component } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 
 const App = () => {
-  console.log("render");
-  const [searchField, setSearchField] = useState("a");
+  // console.log("render");
+  const [searchField, setSearchField] = useState("");
+  const [title, setTitle] = useState("");
   const [monsters, setMonsters] = useState([]);
-  console.log("render");
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json())
-    .then((users) => setMonsters(users));
-  console.log(searchField);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
+  // console.log("işlendi");
+
+  useEffect(() => {
+    // console.log("effect ateşlendi");
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((users) => setMonsters(users));
+  }, []);
+
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
+    });
+    // console.log("Effect2 ateşlendi");
+    setFilteredMonsters(newFilteredMonsters);
+    // console.log("Effect Ateşlendi");
+  }, [monsters, searchField]);
+
+  // console.log(searchField);
   const searchChange = (e) => {
     const searchFieldString = e.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
-  const filteredMonsters = monsters.filter((monster) => {
-    return monster.name.toLocaleLowerCase().includes(searchField);
-  });
+
+  const başlıkDeğişikliği = (e) => {
+    const searchFieldString = e.target.value.toLocaleLowerCase();
+    setTitle(searchFieldString);
+  };
+
   return (
     <div className="App">
-      <h1 className="app-title">Monsters Rolodex</h1>
+      <h1 className="app-title">{title}</h1>
       <SearchBox
         onChangeHandler={searchChange}
         placeholder="search monsters..."
         className="monsters-search-box"
+      />
+      <br />
+      <SearchBox
+        onChangeHandler={başlıkDeğişikliği}
+        placeholder="başlıkları ara..."
+        className="title-search-box"
       />
       <CardList monsters={filteredMonsters} />
     </div>
