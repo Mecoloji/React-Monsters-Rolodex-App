@@ -2,8 +2,9 @@
   -webkit-appearance: none;
   border: none;
   outline: none;
-  padding: 10px;
-  width: 150px;
+  padding: 12px;
+  width: 200px;
   line-height: 30px;
   margin-bottom: 30px;
+  border-radius: 10px;
 }

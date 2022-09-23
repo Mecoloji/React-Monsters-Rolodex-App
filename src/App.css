@@ -17,7 +17,11 @@ body {
 .app-title {
   margin-top: 75px;
   margin-bottom: 40px;
-  font-size: 115px;
+  font-size: 125px;
   color: #08dacf;
   font-family: "Bahianita";
+}
+
+::placeholder {
+  font-size: 14px;
 }

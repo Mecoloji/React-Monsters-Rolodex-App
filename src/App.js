@@ -34,25 +34,25 @@ const App = () => {
     setSearchField(searchFieldString);
   };
 
-  const başlıkDeğişikliği = (e) => {
-    const searchFieldString = e.target.value.toLocaleLowerCase();
-    setTitle(searchFieldString);
-  };
+  // const başlıkDeğişikliği = (e) => {
+  //   const searchFieldString = e.target.value.toLocaleLowerCase();
+  //   setTitle(searchFieldString);
+  // };
 
   return (
     <div className="App">
-      <h1 className="app-title">{title}</h1>
+      <h1 className="app-title">Monster Rolodex</h1>
       <SearchBox
         onChangeHandler={searchChange}
-        placeholder="search monsters..."
+        placeholder="Search Monsters..."
         className="monsters-search-box"
       />
       <br />
-      <SearchBox
+      {/* <SearchBox
         onChangeHandler={başlıkDeğişikliği}
         placeholder="başlıkları ara..."
         className="title-search-box"
-      />
+      /> */}
       <CardList monsters={filteredMonsters} />
     </div>
   );
